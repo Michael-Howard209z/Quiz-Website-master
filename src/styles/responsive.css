@@ -1,0 +1,677 @@
+/* Responsive Design for Quiz Website */
+
+/* Desktop improvements - Đồng bộ button style với mobile */
+@media (min-width: 769px) {
+  /* Button improvements for desktop */
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.625rem 1rem;
+    min-height: 40px;
+    font-size: 0.9375rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  /* Icon buttons - vuông vắn hơn */
+  button.btn-secondary svg,
+  button.text-purple-600 svg,
+  button.text-red-600 svg,
+  button.text-blue-600 svg,
+  button.text-green-600 svg {
+    width: 1.125rem;
+    height: 1.125rem;
+  }
+
+  /* Button chỉ có icon */
+  button.btn-secondary:has(svg):not(:has(*:not(svg))),
+  button[class*="text-"]:has(svg):not(:has(*:not(svg))) {
+    padding: 0.625rem;
+    min-width: 40px;
+    min-height: 40px;
+    border-radius: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Button có cả icon và text */
+  button.btn-secondary:has(svg):has(*:not(svg)) {
+    padding: 0.625rem 1rem;
+    gap: 0.5rem;
+  }
+
+  /* Force mobile layout cho trang Lớp học - ẩn desktop layout */
+  .card .hidden.sm\:flex {
+    display: none !important;
+  }
+
+  /* Force mobile layout cho trang Lớp học - hiển thị mobile layout */
+  .card .sm\:hidden {
+    display: block !important;
+    width: 100%;
+  }
+
+  /* Force mobile layout cho quiz items trong lớp */
+  .card .space-y-2 .hidden.sm\:flex {
+    display: none !important;
+  }
+
+  .card .space-y-2 .sm\:hidden {
+    display: block !important;
+    width: 100%;
+  }
+
+  /* Tỉ lệ 60-40 cho nút Tham gia/Làm bài và cụm nút action */
+  /* Container flex - full width */
+  .card .sm\:hidden .flex.flex-row.gap-2 {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  /* Nút chính (Tham gia/Làm bài) - chiếm 60% */
+  .card .sm\:hidden .flex.flex-row.gap-2 .btn-primary,
+  .card .sm\:hidden .flex.flex-row.gap-2 > a.btn-secondary.w-full,
+  .card .sm\:hidden .flex.flex-row.gap-2 > button.btn-primary {
+    flex: 0 0 60%;
+    min-width: 0;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.875rem;
+    padding: 0.625rem 0.75rem;
+  }
+
+  /* Dropdown container cũng chiếm 60% */
+  .card .sm\:hidden .flex.flex-row.gap-2 > .relative {
+    flex: 0 0 60%;
+    min-width: 0;
+    max-width: 60%;
+  }
+
+  /* Button trong dropdown container - chiếm full width của parent */
+  .card .sm\:hidden .flex.flex-row.gap-2 > .relative > button.btn-primary {
+    width: 100%;
+    flex: 1 1 auto;
+    min-width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.875rem;
+    padding: 0.625rem 0.75rem;
+  }
+
+  /* Các nút icon - tự giãn ra để chiếm hết không gian còn lại */
+  .card .sm\:hidden .flex.flex-row.gap-2 > button[class*="w-9"] {
+    flex: 1 1 0;
+    min-width: 36px;
+    max-width: none;
+    width: auto;
+    height: auto;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+
+  /* Căn giữa icon SVG trong các nút action */
+  .card .sm\:hidden .flex.flex-row.gap-2 > button[class*="w-9"] svg {
+    display: block;
+    margin: auto;
+    flex-shrink: 0;
+  }
+
+  /* Wrapper cho tất cả icon buttons - chiếm 1 phần flex bằng nút chính */
+  .card .sm\:hidden .flex.flex-row.gap-2 {
+    justify-content: space-between;
+  }
+}
+
+/* Breakpoint 710px-640px: Fix overflow - nút "Làm bài" co lại, cụm action giữ nguyên */
+@media (min-width: 641px) and (max-width: 710px) {
+  /* Override tỉ lệ 60-40: Nút chính co lại tự động thay vì cố định 60% */
+  .card .sm\:hidden .flex.flex-row.gap-2 .btn-primary,
+  .card .sm\:hidden .flex.flex-row.gap-2 > a.btn-secondary.w-full,
+  .card .sm\:hidden .flex.flex-row.gap-2 > button.btn-primary {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  /* Dropdown container cũng co lại tự động */
+  .card .sm\:hidden .flex.flex-row.gap-2 > .relative {
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+  }
+
+  /* Các nút icon - giữ kích thước cố định 36px */
+  .card .sm\:hidden .flex.flex-row.gap-2 > button[class*="w-9"] {
+    flex: 0 0 36px !important;
+    min-width: 36px !important;
+    max-width: 36px !important;
+    width: 36px !important;
+  }
+}
+
+/* Global responsive improvements */
+@media (max-width: 640px) {
+  /* Small screens - phones */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .card {
+    margin-bottom: 1rem;
+    padding: 1rem;
+  }
+
+  .text-3xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .text-2xl {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+  }
+
+  .text-xl {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Medium screens - tablets */
+  .flex-gap-8 {
+    gap: 1rem;
+  }
+
+  .space-y-6 > * + * {
+    margin-top: 1rem;
+  }
+
+  .space-y-4 > * + * {
+    margin-top: 0.75rem;
+  }
+
+  /* Icon buttons - căn giữa cho các nút icon */
+  button[class*="text-purple-"],
+  button[class*="text-red-"],
+  button[class*="text-blue-"],
+  button[class*="text-green-"],
+  button[class*="text-yellow-"],
+  button[class*="text-gray-"] {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    min-height: 40px;
+  }
+
+  /* Override: Dropdown menu items should be left-aligned, not centered */
+  .custom-dropdown-container button[class*="text-gray-"],
+  .custom-dropdown-container button[class*="text-blue-"] {
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+
+  /* Force mobile layout cho trang Lớp học ở tablet */
+  .card .hidden.sm\:flex {
+    display: none !important;
+  }
+
+  .card .sm\:hidden {
+    display: block !important;
+    width: 100%;
+  }
+
+  .card .space-y-2 .hidden.sm\:flex {
+    display: none !important;
+  }
+
+  .card .space-y-2 .sm\:hidden {
+    display: block !important;
+    width: 100%;
+  }
+
+  /* Tỉ lệ 60-40 cho mobile/tablet */
+  .card .sm\:hidden .flex.flex-row.gap-2 {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .card .sm\:hidden .flex.flex-row.gap-2 .btn-primary,
+  .card .sm\:hidden .flex.flex-row.gap-2 > a.btn-secondary.w-full,
+  .card .sm\:hidden .flex.flex-row.gap-2 > button.btn-primary {
+    flex: 0 0 60%;
+    min-width: 0;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.875rem;
+    padding: 0.625rem 0.75rem;
+  }
+
+  .card .sm\:hidden .flex.flex-row.gap-2 > .relative {
+    flex: 0 0 60%;
+    min-width: 0;
+    max-width: 60%;
+  }
+
+  .card .sm\:hidden .flex.flex-row.gap-2 > .relative > button.btn-primary {
+    width: 100%;
+    flex: 1 1 auto;
+    min-width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.875rem;
+    padding: 0.625rem 0.75rem;
+  }
+
+  /* Các nút icon mobile - tự giãn ra */
+  .card .sm\:hidden .flex.flex-row.gap-2 > button[class*="w-9"] {
+    flex: 1 1 0;
+    min-width: 36px;
+    max-width: none;
+    width: auto;
+    height: auto;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+  }
+
+  .card .sm\:hidden .flex.flex-row.gap-2 > button[class*="w-9"] svg {
+    display: block;
+    margin: auto;
+    flex-shrink: 0;
+  }
+
+  /* Quiz page specific */
+  .quiz-container {
+    padding: 1rem 0;
+  }
+
+  .quiz-timer {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+
+  .quiz-question {
+    padding: 1rem;
+  }
+
+  .quiz-answer-button {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .quiz-navigation {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .quiz-sidebar {
+    order: -1;
+    margin-bottom: 1rem;
+  }
+
+  .question-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.25rem;
+  }
+
+  .question-grid button {
+    padding: 0.5rem 0.25rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Large screens - small laptops */
+  .main-layout {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    order: -1;
+  }
+  .content {
+    width: 100%;
+  }
+  /* Force slight vertical spacing for inline minimap toggle */
+  .minimap-toggle-wrap {
+    /* Loại bỏ padding để con button có thể cao 100% container */
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    /* Dùng margin tạo khoảng hở mà không ảnh hưởng chiều cao của button */
+    margin-top: 2px !important;
+    margin-bottom: 2px !important;
+    display: flex;
+    align-items: stretch;
+    align-self: stretch !important; /* đảm bảo wrapper tự kéo dãn theo container */
+  }
+  .minimap-toggle-wrap > button {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    height: 100% !important;
+    min-height: 100% !important;
+    line-height: 1 !important;
+    box-sizing: border-box;
+    display: flex !important;
+    align-items: center !important; /* căn giữa theo chiều dọc */
+    justify-content: center !important;
+  }
+  .minimap-toggle-wrap > button svg,
+  .minimap-toggle-wrap > button span {
+    align-self: center !important; /* đảm bảo icon & text cùng trục dọc */
+  }
+}
+
+/* Music player responsive - DISABLED to keep desktop size */
+/* @media (max-width: 640px) {
+  .media-player-box {
+    width: calc(100vw - 2rem);
+    right: 1rem;
+    left: 1rem;
+    bottom: 4rem;
+  }
+  
+  .track-name {
+    font-size: 0.875rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .controls button,
+  .options button {
+    min-width: 2rem;
+    min-height: 2rem;
+    padding: 0.5rem;
+  }
+  
+  .timeline-slider {
+    height: 3px;
+  }
+} */
+
+/* Header responsive fixes */
+@media (max-width: 768px) {
+  .header-logo {
+    font-size: 1.125rem;
+  }
+
+  .mobile-nav {
+    top: 4rem;
+  }
+
+  .mobile-nav-item {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  /* Fix button alignment in mobile menu - override justify-content: center */
+  .mobile-nav button[class*="text-red-"].w-full {
+    justify-content: flex-start !important;
+  }
+}
+
+/* Form and input responsive */
+@media (max-width: 640px) {
+  .input-field {
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+  }
+
+  /* Đảm bảo thẻ <a> với class btn cũng căn giữa */
+  a.btn-primary,
+  a.btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .form-container {
+    padding: 1rem;
+  }
+
+  /* Điều chỉnh tỉ lệ cho màn hình nhỏ - nút chính co lại, nút action giữ nguyên */
+  .card .sm\:hidden .flex.flex-row.gap-2 .btn-primary,
+  .card .sm\:hidden .flex.flex-row.gap-2 > a.btn-secondary.w-full,
+  .card .sm\:hidden .flex.flex-row.gap-2 > button.btn-primary {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card .sm\:hidden .flex.flex-row.gap-2 > .relative {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: none;
+  }
+
+  /* Các nút icon giữ kích thước cố định trên màn hình nhỏ */
+  .card .sm\:hidden .flex.flex-row.gap-2 > button[class*="w-9"] {
+    flex: 0 0 auto;
+    min-width: 36px;
+    max-width: 36px;
+    width: 36px;
+    height: 36px;
+    padding: 0.375rem;
+  }
+}
+
+/* Layout dọc cho các nút ở breakpoint 570px */
+@media (max-width: 570px) {
+  /* Container nút cho QUIZ items - trong danh sách quiz */
+  .card .sm\:hidden .flex.flex-row.gap-2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Container nút cho CLASS - nút Tham gia/Vào lớp và action buttons */
+  .card > .sm\:hidden .flex.flex-row.gap-2 {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Nút chính cho QUIZ (Làm bài) - chiếm full width hàng đầu */
+  .card .sm\:hidden .flex.flex-row.gap-2 > a.btn-secondary:first-child,
+  .card .sm\:hidden .flex.flex-row.gap-2 > .btn-primary:first-child {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Nút chính cho CLASS (Tham gia) hoặc dropdown (Vào lớp) - chiếm full width */
+  .card > .sm\:hidden .flex.flex-row.gap-2 > .btn-primary:first-child,
+  .card > .sm\:hidden .flex.flex-row.gap-2 > a.btn-secondary:first-child,
+  .card > .sm\:hidden .flex.flex-row.gap-2 > .relative:first-child {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Button trong dropdown container */
+  .card > .sm\:hidden .flex.flex-row.gap-2 > .relative > button {
+    width: 100%;
+  }
+
+  /* Các nút action cho QUIZ (icon buttons) - xếp ngang ở hàng dưới, chia đều không gian */
+  .card .sm\:hidden .flex.flex-row.gap-2 > button.w-9,
+  .card .sm\:hidden .flex.flex-row.gap-2 > button.rounded {
+    flex: 1 1 0;
+    min-width: 36px;
+    max-width: none;
+    width: auto;
+    height: 40px;
+  }
+
+  /* Các nút action cho CLASS (icon buttons) - xếp ngang ở hàng dưới, chia đều không gian */
+  .card > .sm\:hidden .flex.flex-row.gap-2 > button.w-9,
+  .card > .sm\:hidden .flex.flex-row.gap-2 > button.rounded {
+    flex: 1 1 0;
+    min-width: 36px;
+    max-width: none;
+    width: auto;
+    height: 40px;
+  }
+}
+
+/* Toast notifications responsive */
+@media (max-width: 768px) {
+  .toast-container {
+    bottom: 1rem !important;
+    left: 1rem !important;
+    right: 1rem !important;
+    transform: none !important;
+  }
+
+  .toast-message {
+    font-size: 0.875rem;
+    padding: 0.75rem;
+  }
+}
+
+/* Dropdown menus responsive */
+@media (max-width: 640px) {
+  .dropdown-menu {
+    position: fixed !important;
+    top: auto !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    transform: none !important;
+    border-radius: 1rem 1rem 0 0 !important;
+    max-height: 50vh;
+    overflow-y: auto;
+  }
+}
+
+/* Grid layouts responsive */
+@media (max-width: 640px) {
+  .grid-cols-5 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .grid-cols-6 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .grid-cols-5 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* Animation performance on mobile */
+@media (max-width: 768px) {
+  .transition-transform {
+    transition: transform 0.2s ease;
+  }
+
+  .transition-all {
+    transition: all 0.2s ease;
+  }
+
+  .duration-300 {
+    transition-duration: 0.2s;
+  }
+
+  .duration-200 {
+    transition-duration: 0.15s;
+  }
+}
+
+/* Touch targets */
+@media (max-width: 768px) {
+  button,
+  .btn,
+  .clickable {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .small-button {
+    min-height: 36px;
+    min-width: 36px;
+  }
+}
+
+/* Scrollable areas */
+@media (max-width: 768px) {
+  .scrollable-content {
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+  }
+
+  .quiz-content {
+    max-height: calc(100vh - 12rem);
+    overflow-y: auto;
+  }
+}
+
+/* Hide elements on mobile if needed */
+@media (max-width: 640px) {
+  .hidden-mobile {
+    display: none !important;
+  }
+
+  .visible-mobile {
+    display: block !important;
+  }
+}
+
+@media (min-width: 641px) {
+  .hidden-desktop {
+    display: none !important;
+  }
+
+  .visible-desktop {
+    display: block !important;
+  }
+}

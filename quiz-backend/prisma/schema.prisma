@@ -1,0 +1,219 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.0.x", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "rhel-openssl-1.0.x", "rhel-openssl-1.1.x", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String          @id @default(cuid())
+  email          String          @unique
+  passwordHash   String
+  name           String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  classes        Class[]
+  quizzes        Quiz[]
+  sessions       QuizSession[]
+  sharedItems    ShareItem[]
+  sharedAccesses SharedAccess[]
+  files          UploadedFile[]
+  messages       ChatMessage[]
+  chatReadStatus ChatReadStatus?
+  lastLoginAt    DateTime?
+  lastLogoutAt   DateTime?
+  lastActivityAt DateTime?
+  quizAttempts   QuizAttempt[]
+}
+
+model Class {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  ownerId     String
+  owner       User     @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  quizzes     Quiz[]
+}
+
+model Quiz {
+  id           String        @id @default(cuid())
+  title        String
+  description  String?
+  published    Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  ownerId      String
+  classId      String
+  questions    Question[]
+  class        Class         @relation(fields: [classId], references: [id], onDelete: Cascade)
+  owner        User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  sessions     QuizSession[]
+  quizAttempts QuizAttempt[]
+}
+
+model Question {
+  id             String       @id @default(cuid())
+  question       String
+  type           QuestionType
+  options        Json?
+  correctAnswers Json
+  explanation    String?
+  questionImage  String?
+  optionImages   Json?
+  quizId         String
+  parentId       String?
+  parent         Question?    @relation("QuestionChildren", fields: [parentId], references: [id], onDelete: Cascade)
+  children       Question[]   @relation("QuestionChildren")
+  quiz           Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+}
+
+model QuizSession {
+  id             String      @id @default(cuid())
+  score          Int
+  totalQuestions Int
+  timeSpent      Int
+  answers        Json
+  startedAt      DateTime    @default(now())
+  completedAt    DateTime    @default(now())
+  quizId         String
+  userId         String
+  quiz           Quiz        @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  user           User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quizAttempt    QuizAttempt?
+}
+
+model UploadedFile {
+  id         String   @id @default(cuid())
+  name       String
+  type       FileType
+  size       Int
+  content    String?  @db.Text
+  uploadedAt DateTime @default(now())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PublicItem {
+  id         String     @id @default(cuid())
+  targetType TargetType
+  targetId   String
+  createdAt  DateTime   @default(now())
+
+  @@unique([targetType, targetId])
+}
+
+model ShareItem {
+  id         String     @id @default(cuid())
+  ownerId    String
+  targetType TargetType
+  targetId   String
+  code       String?
+  createdAt  DateTime   @default(now())
+  owner      User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+
+  @@unique([targetType, targetId])
+}
+
+model SharedAccess {
+  id          String      @id @default(cuid())
+  userId      String
+  targetType  TargetType
+  targetId    String
+  accessLevel AccessLevel @default(full)
+  createdAt   DateTime    @default(now())
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, targetType, targetId])
+}
+
+enum QuestionType {
+  single
+  multiple
+  text
+  drag
+  composite
+}
+
+enum FileType {
+  docs
+  json
+  txt
+}
+
+enum TargetType {
+  class
+  quiz
+}
+
+enum AccessLevel {
+  full
+  navigationOnly
+}
+
+enum ChatAttachmentType {
+  image
+  video
+  file
+}
+
+model ChatMessage {
+  id             String              @id @default(cuid())
+  userId         String
+  content        String?
+  attachmentUrl  String?
+  attachmentType ChatAttachmentType?
+  createdAt      DateTime            @default(now())
+  user           User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model ChatReadStatus {
+  id         String   @id @default(cuid())
+  userId     String   @unique
+  lastReadAt DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PasswordReset {
+  id         String   @id @default(cuid())
+  email      String
+  userId     String?
+  otpHash    String
+  expiresAt  DateTime
+  attempts   Int      @default(0)
+  usedAt     DateTime?
+  createdAt  DateTime @default(now())
+
+  @@index([email, createdAt])
+}
+
+model QuizAttempt {
+  id            String       @id @default(cuid())
+  userId        String
+  quizId        String
+  startedAt     DateTime     @default(now())
+  endedAt       DateTime?
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  quiz          Quiz         @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  quizSessionId String?      @unique
+  quizSession   QuizSession? @relation(fields: [quizSessionId], references: [id], onDelete: SetNull)
+
+  @@index([userId, quizId, startedAt])
+}
+
+model BannedAccess {
+  id          String   @id @default(cuid())
+  userId      String
+  targetType  TargetType 
+  targetId    String
+  bannedCode  String
+  createdAt   DateTime @default(now())
+
+  @@unique([userId, targetType, targetId, bannedCode])
+}

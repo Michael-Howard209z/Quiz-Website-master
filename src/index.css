@@ -1,0 +1,1299 @@
+/* Animations for modal dialogs */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);  
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* Header navigation active state for Light mode */
+.header-nav-active {
+  background: linear-gradient(90deg, rgba(255,255,255,0.85) 0%, rgba(219,234,254,0.95) 50%, rgba(240,249,255,0.95) 100%); /* translucent white + blue gradient */
+  color: #1e40af !important; /* text-primary-700 */
+  border-left: 4px solid #2563eb; /* border-primary-600 */
+  box-shadow: 0 1px 4px 0 rgba(59,130,246,0.10);
+  position: relative;
+  z-index: 0;
+}
+@keyframes shimmer {
+  0% {
+    background-position: -120% 0;
+  }
+  100% {
+    background-position: 120% 0;
+  }
+}
+
+.nav-shimmer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  border-radius: 6px;
+  background-image: var(--shimmer-gradient, linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.0) 0%,
+    rgba(255, 255, 255, 0.18) 30%,
+    rgba(255, 255, 255, 0.55) 52%,
+    rgba(255, 255, 255, 0.95) 72%,
+    rgba(255, 255, 255, 0.0) 100%
+  ));
+  background-size: 100% 100%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  transform: translateX(var(--shimmer-offset, -120%));
+  transition:
+    transform 0.6s linear,
+    opacity 0s;
+  will-change: transform, opacity;
+}
+
+.nav-shimmer.forward,
+.nav-shimmer.backward {
+  opacity: 1;
+}
+
+.nav-shimmer.forward {
+  --shimmer-offset: 120%;
+  --shimmer-gradient: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.0) 0%,
+    rgba(255, 255, 255, 0.12) 28%,
+    rgba(255, 255, 255, 0.42) 46%,
+    rgba(255, 255, 255, 0.98) 68%,
+    rgba(255, 255, 255, 0.0) 100%
+  );
+}
+
+.nav-shimmer.backward {
+  --shimmer-offset: -120%;
+  --shimmer-gradient: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.0) 0%,
+    rgba(255, 255, 255, 0.98) 32%,
+    rgba(255, 255, 255, 0.42) 54%,
+    rgba(255, 255, 255, 0.12) 72%,
+    rgba(255, 255, 255, 0.0) 100%
+  );
+}
+
+/* Page Transition Animations */
+@keyframes slideDownIn {
+  from { opacity: 0; transform: translateY(-50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideLeftIn { /* From Right to Left */
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideUpIn { /* From Bottom to Up */
+  from { opacity: 0; transform: translateY(50px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slideDownIn {
+  animation: slideDownIn 0.6s ease-in-out backwards;
+}
+
+.animate-slideLeftIn {
+  animation: slideLeftIn 0.8s ease-in-out backwards; /* Slightly slower for side content */
+}
+
+
+.animate-slideUpIn {
+  animation: slideUpIn 0.8s ease-in-out backwards;
+}
+
+/* Animation Delays */
+/* Animation Delays - renamed to avoid conflict with Tailwind transition-delay */
+.anim-delay-100 {
+  animation-delay: 0.1s;
+}
+.anim-delay-200 {
+  animation-delay: 0.2s;
+}
+.anim-delay-300 {
+  animation-delay: 0.3s;
+}
+.anim-delay-400 {
+  animation-delay: 0.4s;
+}
+.anim-delay-500 {
+  animation-delay: 0.5s;
+}
+
+
+
+
+/* 3D Perspective for hover effects */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+/* Neon border animation */
+@keyframes neonBorder {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Custom scrollbar for quiz list in ClassesPage */
+.quiz-scrollbar-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.quiz-scrollbar-container::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+.quiz-scrollbar-container::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+/* Dark mode for quiz-scrollbar-container */
+.dark .quiz-scrollbar-container::-webkit-scrollbar-thumb {
+  background: #374151 !important;
+}
+.dark .quiz-scrollbar-container::-webkit-scrollbar-track {
+  background: #111827 !important;
+}
+/* Firefox dark mode for quiz-scrollbar-container */
+.dark .quiz-scrollbar-container {
+  scrollbar-color: #374151 #111827 !important;
+}
+@media (prefers-color-scheme: dark) {
+  .quiz-scrollbar-container::-webkit-scrollbar-thumb {
+    background: #374151;
+  }
+  .quiz-scrollbar-container::-webkit-scrollbar-track {
+    background: #111827;
+  }
+}
+/* Tailwind CSS directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Stabilize layout to avoid viewport width thrash at scrollbar show/hide */
+html, body {
+/* Only reserve gutter when scrollbar actually appears */
+  scrollbar-gutter: auto;
+}
+
+/* Chat scrollbar - thinner and subtle */
+.chat-scroll, .input-scroll {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(100, 116, 139, 0.6) transparent; /* thumb-color track-color */
+}
+.chat-scroll::-webkit-scrollbar,
+.input-scroll::-webkit-scrollbar {
+  width: 6px; /* thinner ~50% */
+}
+.chat-scroll::-webkit-scrollbar-track,
+.input-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.chat-scroll::-webkit-scrollbar-thumb,
+.input-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.6); /* slate-500 */
+  border-radius: 9999px;
+}
+.chat-scroll:hover::-webkit-scrollbar-thumb,
+.input-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(100, 116, 139, 0.8);
+}
+
+/* Import responsive styles */
+@import './styles/responsive.css';
+
+/* Import code fonts for logo */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700;800&family=Fira+Code:wght@300;400;500;600;700&family=Source+Code+Pro:wght@300;400;500;600;700;900&display=swap');
+
+/* Import soft/rounded fonts */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700;800&display=swap');
+
+/* Baseline cursor and selection behavior */
+body {
+  cursor: default; /* default arrow for most elements */
+}
+
+/* Remove default password eye in Edge/IE and other browsers */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
+input::-webkit-password-reveal-button {
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* Do not allow text selection by default */
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow text cursor and selection only for text input elements */
+/* Text-like inputs show text cursor */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+textarea,
+[contenteditable="true"],
+.text-selectable {
+  cursor: text !important;
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Range sliders should use pointer cursor */
+input[type="range"],
+.timeline-slider {
+  cursor: pointer !important;
+}
+/* Slider thumbs cursors */
+input[type="range"]::-webkit-slider-thumb { cursor: pointer; }
+input[type="range"]::-moz-range-thumb { cursor: pointer; }
+input[type="range"]::-ms-thumb { cursor: pointer; }
+
+/* Allow pointer cursor for interactive elements */
+button,
+a,
+[role="button"],
+[onclick],
+.cursor-pointer {
+  cursor: pointer !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+/* Ensure pointer applies to children inside clickable elements */
+button *,
+a *,
+[role="button"] *,
+[onclick] *,
+.cursor-pointer * {
+  cursor: pointer !important;
+}
+/* Exception: preserve zoom cursor for images */
+button img.cursor-zoom-in,
+a img.cursor-zoom-in,
+[role="button"] img.cursor-zoom-in,
+[onclick] img.cursor-zoom-in,
+.cursor-pointer img.cursor-zoom-in {
+  cursor: zoom-in !important;
+}
+
+/* Draggable elements show grab/grabbing cursor */
+[draggable="true"],
+.draggable {
+  cursor: grab !important;
+}
+[draggable="true"]:active,
+.draggable:active {
+  cursor: grabbing !important;
+}
+
+.btn-primary,
+.btn-secondary,
+.effect-btn,
+.btn-primary *,
+.btn-secondary *,
+.effect-btn * {
+  cursor: pointer !important;
+}
+
+/* Disabled buttons: force not-allowed cursor and prevent children from intercepting mouse events */
+button:disabled,
+button[disabled],
+button:disabled *,
+button[disabled] * {
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+/* Restore pointer-events on the disabled button itself (only children should have none) */
+button:disabled,
+button[disabled] {
+  pointer-events: auto !important;
+}
+
+
+/* Drag question specific: force grab cursors within draggable answers, overriding generic pointer rules */
+.drag-question [draggable="true"],
+.drag-question .draggable {
+  cursor: grab !important;
+}
+.drag-question [draggable="true"]:active,
+.drag-question .draggable:active {
+  cursor: grabbing !important;
+}
+/* Ensure children inside draggable answers inherit the grab/grabbing cursor (not pointer) */
+.drag-question [draggable="true"] *,
+.drag-question .draggable * {
+  cursor: inherit !important;
+}
+
+/* Allow text selection for readable content when needed */
+p.text-selectable,
+span.text-selectable,
+div.text-selectable,
+pre,
+code {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+/* New Utility: Allow selection but keep original cursor (e.g. pointer on buttons) */
+.allow-selection,
+.allow-selection * {
+  -webkit-user-select: text !important;
+  -moz-user-select: text !important;
+  -ms-user-select: text !important;
+  user-select: text !important;
+}
+
+/* Force disable selection (overrides allow-selection) */
+.prevent-selection,
+.prevent-selection * {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Custom styles cho dark mode và soft light mode */
+@layer base {
+  body {
+    @apply transition-colors duration-200;
+    /* Soft background cho light mode thay vì trắng tinh - màu kem dịu mắt */
+    background-color: #fafaf9; /* stone-50 */
+    color: #1c1917; /* stone-900 cho text contrast tốt */
+  }
+  
+  /* Dark mode vẫn giữ nguyên */
+  .dark body {
+    background-color: #0f172a; /* slate-900 */
+    color: #f1f5f9; /* slate-100 */
+  }
+  
+  /* Global scrollbar styles */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 #e2e8f0; /* thumb-color track-color for Firefox */
+  }
+  
+  html::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  
+  html::-webkit-scrollbar-track {
+    background: #e2e8f0; /* slate-200 - darker track for more contrast */
+    border-radius: 6px;
+  }
+  
+  html::-webkit-scrollbar-thumb {
+    background: #94a3b8; /* slate-400 - more prominent thumb */
+    border-radius: 6px;
+    border: 2px solid #e2e8f0;
+  }
+  
+  html::-webkit-scrollbar-thumb:hover {
+    background: #64748b; /* slate-500 - darker on hover */
+  }
+  
+  html::-webkit-scrollbar-corner {
+    background: #e2e8f0;
+  }
+  
+  /* Dark mode global scrollbar */
+  html.dark {
+    scrollbar-color: #64748b #0f172a !important; /* thumb-color track-color for Firefox */
+  }
+  
+  html.dark::-webkit-scrollbar-track {
+    background: #0f172a !important; /* dark track matching body background */
+  }
+  
+  html.dark::-webkit-scrollbar-thumb {
+    background: #64748b !important; /* gray thumb */
+    border: 2px solid #0f172a !important;
+  }
+  
+  html.dark::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8 !important; /* lighter gray on hover */
+  }
+  
+  html.dark::-webkit-scrollbar-corner {
+    background: #0f172a !important;
+  }
+  
+  /* Alternative selector for body-based dark mode */
+  body.dark,
+  .dark body {
+    scrollbar-color: #64748b #0f172a !important;
+  }
+  
+  body.dark::-webkit-scrollbar-track,
+  .dark body::-webkit-scrollbar-track {
+    background: #0f172a !important;
+  }
+  
+  body.dark::-webkit-scrollbar-thumb,
+  .dark body::-webkit-scrollbar-thumb {
+    background: #64748b !important;
+    border: 2px solid #0f172a !important;
+  }
+  
+  body.dark::-webkit-scrollbar-thumb:hover,
+  .dark body::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8 !important;
+  }
+  
+  body.dark::-webkit-scrollbar-corner,
+  .dark body::-webkit-scrollbar-corner {
+    background: #0f172a !important;
+  }
+}
+
+  /* Custom components */
+@layer components {
+  .btn-primary {
+    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 text-sm sm:text-base;
+  }
+  
+  .btn-secondary {
+    @apply bg-stone-200 hover:bg-stone-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-medium py-2 px-4 rounded-lg transition-colors duration-200 text-sm sm:text-base;
+  }
+  
+  .card {
+    @apply bg-white dark:bg-gray-800 rounded-lg;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+  
+  .card:hover {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  }
+  
+  .input-field {
+    @apply w-full px-3 py-2 border border-stone-400 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm sm:text-base;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+  
+  /* Global scrollbar style (matching html) */
+  .global-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 transparent;
+  }
+  .global-scrollbar::-webkit-scrollbar {
+    width: 6px; /* Decrease width to match design if needed, but user said "khít width div". Standard is usually thinner for component scrollbars. But let's stick to 12px if that's "global" or 8px. The previous global was 12px. Let's keep 12px or maybe reduce it? The user said "khít với width div", implying the thumb was smaller than the track. By removing border, it will fill the track. */
+    height: 12px;
+  }
+  .global-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+    border-radius: 6px;
+  }
+  .global-scrollbar::-webkit-scrollbar-thumb {
+    background: #94a3b8;
+    border-radius: 6px;
+    border: none;
+  }
+  .global-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+  }
+  /* Dark mode global scrollbar */
+  .dark .global-scrollbar {
+    scrollbar-color: #64748b transparent;
+  }
+  .dark .global-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .dark .global-scrollbar::-webkit-scrollbar-thumb {
+    background: #64748b;
+    border: none;
+  }
+  .dark .global-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+  }
+
+  /* Custom scrollbar styles */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #94a3b8 transparent; /* thumb-color track-color for Firefox */
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* slate-200 - darker track for more contrast */
+    border-radius: 4px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #94a3b8; /* slate-400 - more prominent thumb */
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #64748b; /* slate-500 - darker on hover */
+  }
+  
+  /* Dark mode scrollbar */
+  .dark .custom-scrollbar {
+    scrollbar-color: #64748b transparent; /* thumb-color track-color for Firefox */
+  }
+  
+  .dark .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* dark track matching component backgrounds */
+  }
+  
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #64748b; /* gray thumb */
+    border: 1px solid #374151;
+  }
+  
+  .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; /* lighter gray on hover */
+  }
+  
+  /* Thin scrollbar for profile activity section (50% thinner) */
+  .custom-thin-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e1 transparent; /* thumb-color track-color for Firefox */
+  }
+  
+  .custom-thin-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .custom-thin-scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* slate-100 */
+    border-radius: 3px;
+  }
+  
+  .custom-thin-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1; /* slate-300 */
+    border-radius: 3px;
+  }
+  
+  .custom-thin-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8; /* slate-400 - darker on hover */
+  }
+  
+  /* Dark mode thin scrollbar */
+  .dark .custom-thin-scrollbar {
+    scrollbar-color: #475569 transparent; /* thumb-color track-color for Firefox */
+  }
+  
+  .dark .custom-thin-scrollbar::-webkit-scrollbar-track {
+    background: transparent; /* slate-800 */
+  }
+  
+  .dark .custom-thin-scrollbar::-webkit-scrollbar-thumb {
+    background: #475569; /* slate-600 */
+  }
+  
+  .dark .custom-thin-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #64748b; /* slate-500 */
+  }
+  
+  /* "Aurora" Glass Scrollbar - Custom designed for Banner Graph */
+  .banner-glass-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent; /* Firefox */
+  }
+
+  .banner-glass-scroll::-webkit-scrollbar {
+    height: 4px; /* Ultra sleek horizontal */
+    width: 4px;  /* Ultra sleek vertical */
+  }
+
+  .banner-glass-scroll::-webkit-scrollbar-track {
+    background: transparent;
+    margin: 4px; /* Breathing room */
+  }
+
+  .banner-glass-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08); /* Even more transparent base */
+    border-radius: 99px; /* Capsule shape */
+    backdrop-filter: blur(4px);
+    transition: background-color 0.4s ease, opacity 0.4s ease; /* Smooth transition */
+  }
+
+  .banner-glass-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.09); /* Ultra subtle hover for Light Mode (Reduced from 0.10) */
+    cursor: grab;
+  }
+
+  /* Dark Mode specific tweaks for "Obsidian" feel */
+  .dark .banner-glass-scroll {
+    scrollbar-color: rgba(255, 255, 255, 0.02) transparent;
+  }
+
+  .dark .banner-glass-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.02); /* Barely visible in Dark Mode */
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.2); /* Inner depth */
+  }
+
+  .dark .banner-glass-scroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.025); /* Ghostly hover presence (Reduced from 0.035 to be closer to base 0.02) */
+  }
+
+
+  /* Fix alignment for weekday labels (Mon, Wed, Fri) 
+     Targeting text-anchor="end" which weekday labels usually have by default.
+  */
+  .contribution-calendar-wrapper svg text[text-anchor="end"] {
+      text-anchor: start !important;
+      transform: translateX(-21px); /* Reduced shift to prevent cutoff (was -28px) */
+  }
+
+  /* Header and Footer optimized texture effects */
+  .header-texture {
+    position: relative;
+    background: 
+      linear-gradient(135deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.04) 100%),
+      radial-gradient(ellipse at top left, rgba(0, 0, 0, 0.12) 0%, transparent 60%);
+  }
+  
+  .dark .header-texture {
+    background: 
+      linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%),
+      radial-gradient(ellipse at top left, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+  }
+  
+  .footer-texture {
+    position: relative;
+    background: 
+      linear-gradient(45deg, rgba(0, 0, 0, 0.07) 0%, rgba(0, 0, 0, 0.03) 100%),
+      radial-gradient(ellipse at bottom right, rgba(0, 0, 0, 0.1) 0%, transparent 60%);
+  }
+  
+  .dark .footer-texture {
+    background: 
+      linear-gradient(45deg, rgba(255, 255, 255, 0.04) 0%, rgba(255, 255, 255, 0.02) 100%),
+      radial-gradient(ellipse at bottom right, rgba(255, 255, 255, 0.07) 0%, transparent 60%);
+  }
+  
+  /* Enhanced border glow */
+  .premium-gradient {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 
+      inset 0 1px 0 rgba(0, 0, 0, 0.04),
+      inset 0 -1px 0 rgba(0, 0, 0, 0.04);
+  }
+  
+  .dark .premium-gradient {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+  }
+  
+  /* Developer-style logo typography */
+  .logo-text {
+    display: inline-block; /* Make it wrap tightly around text */
+    font-family: 'JetBrains Mono', 'Fira Code', 'Source Code Pro', monospace;
+    font-weight: 600;
+    letter-spacing: -0.05em;
+    background: linear-gradient(135deg, #f58402 0%, #fcce00 50%, #ebfc00 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  
+  .dark .logo-text {
+    background: linear-gradient(135deg, #f55b02 0%, #fcac00 50%, #ebfc00 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .logo-text:hover {
+    letter-spacing: 0.02em;
+    transform: translateY(-1px);
+  }
+  
+  .logo-text::before {
+    content: '~/';
+    position: absolute;
+    left: -20px;
+    color: #10b981;
+    font-weight: 500;
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .logo-text:hover::before {
+    opacity: 1;
+    left: -25px;
+  }
+  
+  .logo-text::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    right: 0;
+    width: 0;
+    height: 2px;
+    background: #10b981;
+    animation: cursor-blink 1s infinite;
+    transition: width 0.3s ease;
+  }
+  
+  .logo-text:hover::after {
+    width: 8px;
+    animation: none;
+    background: linear-gradient(90deg, #10b981, #06b6d4);
+  }
+  
+  @keyframes cursor-blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+}
+
+/* Custom Toast Animations */
+@layer components {
+  /* Toast container styles */
+  .toast-container {
+    position: fixed !important;
+    bottom: 20px !important; /* Sát dưới viewport hơn */
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 9999 !important;
+  }
+
+  /* Custom toast enter animation - slide up from bottom */
+  [data-sonner-toaster] [data-sonner-toast] {
+    animation: slideUpFadeInSmall 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  /* Custom toast exit animation - slide down and fade out */
+  [data-sonner-toaster] [data-sonner-toast][data-removed="true"] {
+    animation: slideDownFadeOutSmall 0.3s cubic-bezier(0.4, 0, 1, 1) forwards;
+  }
+
+  /* React Hot Toast custom animations */
+  .react-hot-toast {
+    animation: slideUpBounceSmall 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards !important;
+  }
+
+  .react-hot-toast[data-visible="false"] {
+    animation: slideDownFadeSmall 0.3s cubic-bezier(0.4, 0, 1, 1) forwards !important;
+  }
+
+  @keyframes slideUpFadeInSmall {
+    from {
+      opacity: 0;
+      transform: translateY(60px) scale(0.5); /* Nhỏ hơn và di chuyển ít hơn */
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px) scale(0.85); /* Scale 85% */
+    }
+  }
+
+  @keyframes slideDownFadeOutSmall {
+    from {
+      opacity: 1;
+      transform: translateY(0px) scale(0.85);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(40px) scale(0.5);
+    }
+  }
+
+  @keyframes slideUpBounceSmall {
+    0% {
+      opacity: 0;
+      transform: translateY(60px) scale(0.5);
+    }
+    50% {
+      opacity: 0.8;
+      transform: translateY(-5px) scale(0.9); /* Bounce nhỏ hơn */
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px) scale(0.85);
+    }
+  }
+
+  @keyframes slideDownFadeSmall {
+    from {
+      opacity: 1;
+      transform: translateY(0px) scale(0.85);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(30px) scale(0.75);
+    }
+  }
+
+  /* Toast hover effects */
+  [data-sonner-toast]:hover,
+  .react-hot-toast:hover {
+    transform: scale(0.87) !important; /* Tăng nhẹ từ 0.85 lên 0.87 */
+    transition: transform 0.2s ease !important;
+  }
+
+  /* Mobile responsive adjustments */
+  @media (max-width: 768px) {
+    .toast-container {
+      bottom: 15px !important; /* Sát dưới hơn trên mobile */
+      left: 16px !important;
+      right: 16px !important;
+      transform: none !important;
+    }
+    
+    /* Mobile animations với scale nhỏ hơn */
+    @keyframes slideUpFadeInSmall {
+      from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.4);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0px) scale(0.8);
+      }
+    }
+    
+    @keyframes slideDownFadeOutSmall {
+      from {
+        opacity: 1;
+        transform: translateY(0px) scale(0.8);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(40px) scale(0.4);
+      }
+    }
+    
+    .react-hot-toast:hover {
+      transform: scale(0.82) !important;
+    }
+  }
+}
+
+/* Slide animations for QuizPage */
+/* Entry animations */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Exit animations */
+@keyframes slideOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.animate-slideOutLeft {
+  animation: slideOutLeft 0.2s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.animate-slideOutRight {
+  animation: slideOutRight 0.2s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+/* Music button responsive */
+@media (max-width: 768px) {
+  .music-container {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 1000;
+  }
+  
+  .effect-btn.music-btn {
+    width: 3rem;
+    height: 3rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+  }
+  
+  .effect-btn.music-btn .effect-text {
+    display: none;
+  }
+  
+  .effect-btn.music-btn .effect-icon {
+    font-size: 1.25rem;
+  }
+  
+  /* DISABLED: MediaPlayer responsive override to keep desktop size */
+  /* .media-player-box {
+    position: fixed !important;
+    bottom: 5rem !important;
+    right: 1rem !important;
+    left: 1rem !important;
+    width: auto !important;
+    max-width: none !important;
+  } */
+}
+
+@media (max-width: 480px) {
+  .music-container {
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+  
+  .effect-btn.music-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0.375rem;
+  }
+  
+  .effect-btn.music-btn .effect-icon {
+    font-size: 1rem;
+  }
+  
+  /* DISABLED: MediaPlayer responsive override to keep desktop size */
+  /* .media-player-box {
+    bottom: 4rem !important;
+    right: 0.75rem !important;
+    left: 0.75rem !important;
+  } */
+}
+
+/* Premium Editor Focus Effect */
+@layer components {
+  .editor-focus-ring {
+    @apply transition-all duration-300 ease-out outline-none;
+  }
+
+  .editor-focus-ring:focus,
+  .editor-focus-ring:focus-within {
+    @apply border-orange-500 dark:border-sky-400;
+    box-shadow: 
+      0 0 0 2px rgba(249, 115, 22, 0.1),
+      0 8px 40px rgba(249, 115, 22, 0.15); /* Soft wide fade */
+  }
+
+  .dark .editor-focus-ring:focus,
+  .dark .editor-focus-ring:focus-within {
+    box-shadow: 
+      0 0 0 2px rgba(56, 189, 248, 0.2), /* Tight inner glow */
+      0 0 20px rgba(56, 189, 248, 0.15), /* Mid glow */
+      0 0 60px rgba(56, 189, 248, 0.1); /* Far outer fade */
+  }
+}
+
+/* ===== SCANLINE ===== */
+/* .cyber-scan {
+  position: relative;
+}
+.cyber-scan::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0.04) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  animation: scanMove 6s linear infinite;
+} */
+
+@keyframes scanMove {
+  from { background-position-y: 0; }
+  to { background-position-y: 100%; }
+}
+
+/* ===== HOLOGRAM DOT ===== */
+.cyber-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #22d3ee;
+  box-shadow:
+    0 0 6px #22d3ee,
+    0 0 12px rgba(34,211,238,0.7);
+  animation: flicker 2.5s infinite alternate;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+/* ===== GLITCH TEXT ===== */
+.cyber-glitch {
+  position: relative;
+  font-weight: 500;
+}
+
+.cyber-glitch::before,
+.cyber-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0.8;
+}
+
+.cyber-glitch::before {
+  color: #22d3ee;
+  transform: translate(1px, 0);
+  animation: glitchA 2s infinite linear alternate-reverse;
+}
+
+.cyber-glitch::after {
+  color: #f472b6;
+  transform: translate(-1px, 0);
+  animation: glitchB 1.5s infinite linear alternate-reverse;
+}
+
+@keyframes glitchA {
+  0% { clip-path: inset(0 0 80% 0); }
+  50% { clip-path: inset(30% 0 30% 0); }
+  100% { clip-path: inset(80% 0 0 0); }
+}
+
+@keyframes glitchB {
+  0% { clip-path: inset(70% 0 0 0); }
+  50% { clip-path: inset(20% 0 50% 0); }
+  100% { clip-path: inset(0 0 70% 0); }
+}
+
+.cyber-line:hover .cyber-dot {
+  box-shadow:
+    0 0 10px #22d3ee,
+    0 0 24px rgba(34,211,238,1);
+}
+
+/* LOGO GLITCH LAYERS (DOM Duplication Method) */
+.logo-glitch-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* IMPORTANT: Hide the ::before (prefix) and ::after (cursor) for ghost layers to avoid duplication */
+.logo-glitch-layer::before,
+.logo-glitch-layer::after {
+  content: none !important;
+  display: none !important;
+}
+
+.logo-glitch-layer-1 {
+  transform: translate(1px, -1px);
+  filter: hue-rotate(-60deg);
+  animation: logoGlitchA 2.5s infinite linear alternate;
+}
+
+.logo-glitch-layer-2 {
+  transform: translate(-1px, 1px);
+  filter: hue-rotate(-60deg);
+  animation: logoGlitchB 1.8s infinite linear alternate;
+}
+
+/* Hover Sync for Glitch Layers */
+.logo-main-wrapper:hover .logo-text {
+  letter-spacing: 0.02em;
+  transform: translateY(-1px);
+}
+
+.logo-main-wrapper:hover .logo-glitch-layer-1 {
+  /* Move up 1px from original (1px, -1px) -> (1px, -2px) */
+  transform: translate(1px, -2px);
+}
+
+.logo-main-wrapper:hover .logo-glitch-layer-2 {
+  /* Move up 1px from original (-1px, 1px) -> (-1px, 0px) */
+  transform: translate(-1px, 0px);
+}
+
+/* LOGO GLITCH */
+/* ===== LOGO GLITCH (SAFE VERSION) ===== */
+.logo-glitch-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.logo-glitch-wrapper::before,
+.logo-glitch-wrapper::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.logo-glitch-wrapper::before {
+  transform: translate(1px, -1px);
+  filter: hue-rotate(60deg);
+  animation: logoGlitchA 2.5s infinite linear alternate;
+}
+
+.logo-glitch-wrapper::after {
+  transform: translate(-1px, 1px);
+  filter: hue-rotate(-60deg);
+  animation: logoGlitchB 1.8s infinite linear alternate;
+}
+
+@keyframes logoGlitchA {
+  0%   { clip-path: inset(0 0 85% 0); }
+  50%  { clip-path: inset(30% 0 40% 0); }
+  100% { clip-path: inset(70% 0 0 0); }
+}
+
+@keyframes logoGlitchB {
+  0%   { clip-path: inset(60% 0 0 0); }
+  50%  { clip-path: inset(20% 0 60% 0); }
+  100% { clip-path: inset(0 0 80% 0); }
+}
+
+/* ===== START BUTTON GLITCH (DOM Duplication Method) ===== */
+.start-glitch-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.start-glitch-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.9;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.start-glitch-layer-1 {
+  transform: translate(1px, -2px);
+  filter: hue-rotate(30deg) saturate(2) brightness(1.1);
+  animation: startGlitchA 1.5s infinite linear alternate;
+}
+
+.start-glitch-layer-2 {
+  transform: translate(-2px, 1px);
+  filter: hue-rotate(15deg) saturate(2) brightness(1.2);
+  animation: startGlitchB 1.2s infinite linear alternate;
+}
+
+@keyframes startGlitchA {
+  0%   { clip-path: inset(0 0 85% 0); }
+  50%  { clip-path: inset(30% 0 40% 0); }
+  100% { clip-path: inset(70% 0 0 0); }
+}
+
+@keyframes startGlitchB {
+  0%   { clip-path: inset(60% 0 0 0); }
+  50%  { clip-path: inset(20% 0 60% 0); }
+  100% { clip-path: inset(0 0 80% 0); }
+}
