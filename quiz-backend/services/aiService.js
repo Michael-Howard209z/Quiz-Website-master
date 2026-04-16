@@ -500,8 +500,9 @@ const generateQuiz = async (config) => {
     console.log("Generating content with prompt length:", prompt.length);
 
     try {
-        const selectedModel = modelName || 'gemini-2.5-flash';
-        console.log(`Using model: ${selectedModel}`);
+        // Ưu tiên biến môi trường GEMINI_MODEL, sau đó mới dùng model truyền từ frontend
+        const selectedModel = process.env.GEMINI_MODEL || modelName || 'gemini-2.5-flash';
+        console.log(`Using model: ${selectedModel} (source: ${process.env.GEMINI_MODEL ? 'ENV' : 'request'})`);
 
         const genConfig = {
             temperature: 0.7,
