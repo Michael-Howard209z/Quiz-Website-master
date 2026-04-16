@@ -71,7 +71,7 @@ export default function AIGeneratorModal({ isOpen, onClose, onQuestionsGenerated
         // In extract mode, include all types so the AI can pick freely; in theory, use selection
         selectedTypes: mode === 'extract' ? ['multiple-choice', 'multi-true-false', 'short-answer', 'drag'] : selectedTypes,
         lang: 'vi',
-        modelName: 'gemini-flash-latest',
+        modelName: 'gemini-2.5-flash',
         shouldGenerateExplanations: true,
         useWebSearch: false,
         questionCountModes: {},

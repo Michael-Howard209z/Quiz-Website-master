@@ -500,23 +500,38 @@ const generateQuiz = async (config) => {
     console.log("Generating content with prompt length:", prompt.length);
 
     try {
-        const response = await aiClient.models.generateContent({
-        model: modelName || 'gemini-flash-latest', 
-        contents: contentsParts,
-        config: {
-            thinkingConfig: { thinkingBudget: 8192 }
+        const selectedModel = modelName || 'gemini-2.5-flash';
+        console.log(`Using model: ${selectedModel}`);
+
+        const genConfig = {
+            temperature: 0.7,
+            topP: 0.95,
+            topK: 40,
+            maxOutputTokens: 8192,
+        };
+
+        // Only include thinkingConfig if the model is specifically a thinking model
+        if (selectedModel.includes('thinking')) {
+            genConfig.thinkingConfig = { thinkingBudget: 8192 };
         }
+
+        const response = await aiClient.models.generateContent({
+            model: selectedModel, 
+            contents: contentsParts,
+            config: genConfig
         });
         
         console.log("Generation successful.");
 
         if (generationMode === 'theory') {
-            // Return raw text for theory mode — frontend will use it directly in the editor
             return { textContent: response.text };
         }
         return { questions: extractJson(response.text) };
     } catch (error) {
-        console.error("Error generating content:", error);
+        console.error("Gemini API Error Detail:", error);
+        if (error.message && error.message.includes('fetch failed')) {
+            throw new Error("Không thể kết nối tới Google Gemini. Vui lòng kiểm tra lại đường truyền Internet hoặc API Key.");
+        }
         throw error;
     }
 };
