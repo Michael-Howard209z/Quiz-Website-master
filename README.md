@@ -4,7 +4,12 @@ Chào mừng bạn đến với **THD EDU QUIZ**, một nền tảng quản lý 
 # Dự án gốc 
 [https://github.com/HoanBuCon/Quiz-Website/tree/master](https://github.com/HoanBuCon/Quiz-Website/tree/master)
 ---
-
+<div align="center">
+  <a href="https://guns.lol/_ngncx.hoang" target="_blank">
+    <!-- Keep wallpaper -->
+    <img src="./public/readme.png" alt="Preview" />
+  </a>
+</div>
 ##  Tính Năng Chính
 - **Quản lý lớp học:** Tạo và quản lý các lớp học công khai hoặc riêng tư.
 - **Tạo bài kiểm tra:** Hỗ trợ tạo đề thi từ file Word (định dạng chuẩn).
