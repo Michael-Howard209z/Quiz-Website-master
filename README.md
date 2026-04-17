@@ -1,7 +1,8 @@
 # THD EDU QUIZ - Hệ Thống Quản Lý Bài Kiểm Tra Trực Tuyến
 
 Chào mừng bạn đến với **THD EDU QUIZ**, một nền tảng quản lý và thực hiện bài kiểm tra trực tuyến mạnh mẽ, giao diện hiện đại và chuyên nghiệp.
-
+# Dự án gốc 
+[https://github.com/HoanBuCon/Quiz-Website/tree/master](https://github.com/HoanBuCon/Quiz-Website/tree/master)
 ---
 
 ##  Tính Năng Chính
