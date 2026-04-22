@@ -41,11 +41,10 @@ DATABASE_URL="mysql://your_username:your_password@localhost:3306/your_database"
 JWT_SECRET="your_super_secret_random_string_here_min_32_chars"
 
 # CORS - Chỉ cho phép domain của bạn
-CORS_ORIGIN=https://liemdai.io.vn,https://www.liemdai.io.vn
 
 # ⚠️ Cookie Domain (OPTIONAL)
 # Để trống nếu frontend và backend cùng domain chính xác
-# Set thành .liemdai.io.vn (có dấu chấm) nếu cần hoạt động trên subdomain
+# Set thành (có dấu chấm) nếu cần hoạt động trên subdomain
 COOKIE_DOMAIN=
 
 # SMTP (nếu dùng forgot password)
@@ -69,10 +68,10 @@ Tạo file `.env.production` trong thư mục root với nội dung:
 
 ```env
 # API URL - Phải trùng với domain production
-REACT_APP_API_BASE_URL=https://liemdai.io.vn/api
+REACT_APP_API_BASE_URL=
 
 # Hoặc nếu backend ở subdomain khác:
-# REACT_APP_API_BASE_URL=https://api.liemdai.io.vn
+# REACT_APP_API_BASE_URL=
 ```
 
 ### Bước 3: Kiểm Tra HTTPS
@@ -187,7 +186,7 @@ Chạy lệnh sau để test cookie từ terminal:
 
 ```bash
 # Login và lưu cookie
-curl -X POST https://liemdai.io.vn/api/auth/login \
+curl - \
   -H "Content-Type: application/json" \
   -d '{"email":"test@example.com","password":"test123","rememberMe":true}' \
   -c cookies.txt -v
@@ -196,8 +195,7 @@ curl -X POST https://liemdai.io.vn/api/auth/login \
 cat cookies.txt
 
 # Test request với cookie
-curl https://liemdai.io.vn/api/auth/me \
-  -b cookies.txt -v
+curl b cookies.txt -v
 ```
 
 ---
